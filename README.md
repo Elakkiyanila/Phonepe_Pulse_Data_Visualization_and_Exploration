@@ -46,6 +46,7 @@ store the transformed data into a MySQL database using the “mysql-connector-py
 Use streamlit and plotly libraries in python to create an interactive and visually appealing dasboard
 ## conclusion
 + our solution leverages Python and its powerful libraries to extract, transform, and analyze data from the Phonepe Pulse GitHub repository. 
-+ By using the "mysql-connector-python" library, we efficiently store and retrieve the transformed data in a MySQL database. We create an interactive and visually + + + appealing dashboard using Streamlit and Plotly, allowing users to select different facts and figures to display. 
++ By using the "mysql-connector-python" library, we efficiently store and retrieve the transformed data in a MySQL database. 
++ We create an interactive and visually appealing dashboard using Streamlit and Plotly, allowing users to select different facts and figures to display. 
 + Finally, we ensure the solution is secure, efficient, and user-friendly by thoroughly testing and deploying the dashboard publicly. 
 + Overall, our solution provides valuable insights and information about the data in the Phonepe Pulse GitHub repository in an accessible and visually appealing manner.
