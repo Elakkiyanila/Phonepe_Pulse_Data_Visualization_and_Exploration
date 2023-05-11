@@ -35,10 +35,9 @@ if selected == "Top Performers":
                         color_discrete_sequence=px.colors.sequential.Magenta,
                         hover_data=['Total_Amount'],
                         labels={'Total_Amount':'Total Amount'})
-                col1 = st.columns([1])[0]
-                with col1:
-                    fig.update_traces(textposition='inside', textinfo='percent+label')
-                    st.plotly_chart(fig,use_container_width=True)
+               
+                 fig.update_traces(textposition='inside', textinfo='percent+label')
+                 st.plotly_chart(fig,use_container_width=True)
         if Data_segmentation == "District":
                 mycursor.execute(f"SELECT district, state, sum(Transaction_count) as Total_Count, sum(Transaction_amount) as Total_amount FROM map_transaction WHERE year = {Year} AND quarter = {Quarter} GROUP BY district, state ORDER BY Total_amount DESC LIMIT 10")
                 df = pd.DataFrame(mycursor.fetchall(), columns=['District', 'State', 'Transactions_Count', 'Total_Amount'])
@@ -47,7 +46,7 @@ if selected == "Top Performers":
                         names='District',
                         title='Top 10 Phonepe Transactions according to Districts',
                         color_discrete_sequence=px.colors.sequential.Magenta,
-                        hover_data=['State', 'Transactions_Count'],
+                        hover_data=['Transactions_Count'],
                         labels={'Transactions_Count': 'Transactions_Count'})
 
                 fig.update_traces(textposition='inside', textinfo='percent+label')
@@ -68,7 +67,7 @@ if selected == "Top Performers":
         colum1,colum2= st.columns([1,1.5],gap="large")
         with colum1:
             Year = st.slider("**Select the Year**", min_value=2018, max_value=2022)
-            Quarter = st.selectbox('**Select the Quarter**',('1234'),key='quat')
+            Quarter = st.selectbox('**Select the Quarter**',('1','2','3','4'),key='quat')
         if Data_segmentation == "Brands":
                 mycursor.execute(f"select Brand, sum(Brand_count) as Total_Count, avg(Brand_percentage)*100 as Avg_Percentage from agg_user where Year = {Year} and Quarter = {Quarter} group by Brand order by Total_Count desc limit 10")
                 df = pd.DataFrame(mycursor.fetchall(), columns=['Brand', 'Total_Users','Avg_Percentage'])
