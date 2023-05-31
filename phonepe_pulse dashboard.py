@@ -19,10 +19,16 @@ if selected == "Top Performers":
     Type = st.sidebar.selectbox("**Type**", ("Transactions", "Users"))
     if Type == "Transactions":
         Data_segmentation = st.sidebar.selectbox("**Data segmentation**", ("State", "District", "Pincode"), key="Data segmentation_selectbox")
-        colum1,colum2= st.columns([1,1.5],gap="large")
-        with colum1:
+        col1,col2= st.columns([1,1.5],gap="large")
+        with col1:
                 Year = st.slider("**Select the Year**", min_value=2018, max_value=2022)
                 Quarter = st.selectbox('**Select the Quarter**',('1','2','3','4'),key='qgwe2')
+        with col2:
+            st.write(
+                """
+                By accessing this pie chart, we will get to know about the top three insights in transactions like State, District and Pincode.
+                """
+                )
 
         if Data_segmentation == "State":
                 mycursor.execute(f"select state, sum(Transaction_count) as Total_Transactions_Count, sum(Transaction_amount) as Total_amount from agg_transaction where year = {Year} and quarter = {Quarter} group by state order by Total_amount desc limit 10")
@@ -64,10 +70,16 @@ if selected == "Top Performers":
                 st.plotly_chart(fig,use_container_width=True)
     if Type == "Users":
         Data_segmentation = st.sidebar.selectbox("**Data segmentation**", ("Brands", "Registered_User", "Appopeners"), key="Data segmentation_selectbox")
-        colum1,colum2= st.columns([1,1.5],gap="large")
-        with colum1:
+        col1,col2= st.columns([1,1.5],gap="large")
+        with col1:
             Year = st.slider("**Select the Year**", min_value=2018, max_value=2022)
             Quarter = st.selectbox('**Select the Quarter**',('1','2','3','4'),key='quat')
+        with col2:
+            st.write(
+                """
+                By accessing this donut chart, we will get to know about the top three insights in Users like Brands,Registered User, and Appopeners .
+                """
+                )
         if Data_segmentation == "Brands":
                 mycursor.execute(f"select Brand, sum(Brand_count) as Total_Count, avg(Brand_percentage)*100 as Avg_Percentage from agg_user where Year = {Year} and Quarter = {Quarter} group by Brand order by Total_Count desc limit 10")
                 df = pd.DataFrame(mycursor.fetchall(), columns=['Brand', 'Total_Users','Avg_Percentage'])
@@ -107,10 +119,16 @@ if selected == "Explore Data":
     st.markdown("## :violet[Exploring the data]")
     Type = st.sidebar.selectbox("**Type**", ("Analysis of Transactions", "Users"))
     if Type == "Analysis of Transactions":
-        colum1,colum2= st.columns([1,1.5],gap="large")
-        with colum1:
+        col1,col2= st.columns([1,1.5],gap="large")
+        with col1:
                         Year = st.slider("**Select the Year**", min_value=2018, max_value=2022)
                         Quarter = st.selectbox('**Select the Quarter**',('1','2','3','4'),key='qgwe2')
+        with col2:
+            st.write(
+                """
+                In this page , we will get to know about the insights of transactions count According To District,Transaction Types vs Total Transactions amount and Geomap visualization to show the State based data according to Transaction count and Transaction amount .
+                """
+                )
         st.markdown("## :violet[**Transaction Count According To District**]")
         selected_state = st.selectbox("**please select any State to visualize**",
                              ('andaman-&-nicobar-islands','andhra-pradesh','arunachal-pradesh','assam','bihar',
@@ -192,8 +210,8 @@ if selected == "Explore Data":
              
     if Type == "Users":
         Data_segmentation = st.sidebar.selectbox("**Data segmentation**", ( "Registered Users","Analysis of country"), key="Data_selectbox")
-        colum1,colum2= st.columns([1,1.5],gap="large")
-        with colum1:
+        col1,col2= st.columns([1,1.5],gap="large")
+        with col1:
             Year = st.slider("**Select the Year**", min_value=2018, max_value=2022)
             Quarter = st.selectbox('**Select the Quarter**',('1234'),key='quart')
         if Data_segmentation == "Registered Users": 
